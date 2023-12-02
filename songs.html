@@ -1,0 +1,24 @@
+{% block content %}
+    <h2>Songs</h2>
+    <ul>
+        {% for song in songs %}
+            <li>
+                {{ song.name }} by {{ song.artist }}
+                {% set song_url = url_for('static', filename='') ~ '/' ~ song.path|replace('\\', '/') %}
+                <button onclick="playAudio('{{ song_url }}')">Play</button>
+
+            </li>
+        {% endfor %}
+    </ul>
+    <audio id="audioPlayer" controls></audio>
+
+    <script>
+        function playAudio(src) {
+            var audioPlayer = document.getElementById('audioPlayer');
+            audioPlayer.src = src;
+            audioPlayer.play();
+        }
+    </script>
+{% endblock %}
+
+
